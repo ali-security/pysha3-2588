@@ -94,7 +94,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - "pip install --index-url 'https://:2017-07-18T12:49:47.822630Z@time-machines-pypi.sealsecurity.io/' --disable-pip-version-check --user --upgrade pip"
+  - "pip install --index-url  --disable-pip-version-check --user --upgrade pip"
 
   # Install the build dependencies of the project. If some dependencies contain
   # compiled extensions and are not provided as pre-built wheel packages,
@@ -102,7 +102,7 @@ install:
   # target Python version and architecture
   # - "%CMD_IN_ENV% pip install --index-url 'https://:2017-07-18T12:49:47.822630Z@time-machines-pypi.sealsecurity.io/' -r dev-requirements.txt"
 
-  - "%CMD_IN_ENV% pip install --index-url 'https://:2017-07-18T12:49:47.822630Z@time-machines-pypi.sealsecurity.io/' wheel"
+  - "%CMD_IN_ENV% pip install --index-url  wheel"
 
 build_script:
   # Build the compiled extension

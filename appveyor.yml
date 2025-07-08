@@ -10,33 +10,25 @@ install:
 
 
   # Check that we have the expected version and architecture for Python
-  - "python --version"
-  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
+  # Upgrade pip to the latest version
+  - "python -m pip install --disable-pip-version-check --user --upgrade pip"
 
-  # Upgrade to the latest version of pip to avoid it displaying warnings
-  # about it being out of date.
-  - "pip install --disable-pip-version-check --user --upgrade pip"
+  # Install the build dependencies
+  - "python -m pip install wheel"
 
-  # Install the build dependencies of the project. If some dependencies contain
-  # compiled extensions and are not provided as pre-built wheel packages,
-  # pip will build them from source using the MSVC compiler matching the
-  # target Python version and architecture
-  # - "%CMD_IN_ENV% pip install --index-url 'https://:2017-07-18T12:49:47.822630Z@time-machines-pypi.sealsecurity.io/' -r dev-requirements.txt"
-
-  - "%CMD_IN_ENV% pip install --index-url  wheel"
 
 build_script:
   # Build the compiled extension
-  - "%CMD_IN_ENV% python setup.py build"
+  - python setup.py build"
 
 test_script:
   # Run the project tests
-  - "%CMD_IN_ENV% python setup.py test"
+  - python setup.py test"
 
 after_test:
   # If tests are successful, create binary packages for the project.
-  - "%CMD_IN_ENV% python setup.py bdist_wheel"
-  - ps: "ls dist"
+  - python setup.py bdist_wheel"
+  - python setup.py sdist"
 
 artifacts:
   # Archive the generated packages in the ci.appveyor.com build report.

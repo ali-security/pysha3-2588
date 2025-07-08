@@ -78,10 +78,12 @@ install:
   # purpose but it is problematic because it tends to cancel builds pushed
   # directly to master instead of just PR builds (or the converse).
   # credits: JuliaLang developers.
-  
+  - "ls \"C:/\""
+  - ECHO "Installed SDKs:"
+  - "ls \"C:/Program Files/Microsoft SDKs/Windows\""
   # Install Python (from the official .msi of http://python.org) and pip when
   # not already installed.
-  - ps: if (-not(Test-Path($env:PYTHON))) { & extras\appveyor\install.ps1 }
+  - if (-not(Test-Path($env:PYTHON))) { & extras\appveyor\install.ps1 }
 
   # Prepend newly installed Python to the PATH of this build (this cannot be
   # done from inside the powershell script as it would require to restart
@@ -94,7 +96,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid it displaying warnings
   # about it being out of date.
-  - "pip install --index-url  --disable-pip-version-check --user --upgrade pip"
+  - "pip install --disable-pip-version-check --user --upgrade pip"
 
   # Install the build dependencies of the project. If some dependencies contain
   # compiled extensions and are not provided as pre-built wheel packages,
